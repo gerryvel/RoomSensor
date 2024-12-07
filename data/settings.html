@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <br />
+    <p class="label">WLAN Router</br>
+        SSID: %sCL_SSID%</br>
+        Passwort: %sCL_PASSWORD%
+    </p>
+    <p class="label">Sensor Typ: %sBMP%</br>
+    </br>
+        Typ 0 = BMP280</br>
+        Typ 1 = BME280</br>
+        Typ 2 = BMP3xx</br>
+    </p>
+    </br>    
+    <p class="Input">Neue Daten:</br>
+        %CONFIGPLACEHOLDER%
+    <script>
+        function formToJson(form) 
+        {
+            var xhr = new XMLHttpRequest();
+            var SSID = form.SSID.value;
+            var Password = form.Password.value;
+            var BMP = form.BMP.value;
+            var Client_IP  = form.Client_IP;
+
+            var jsonFormInfo = JSON.stringify({
+                SSID: SSID,
+                Password: Password,
+                BMP: BMP,
+                Client_IP: Client_IP,
+            });
+
+            xhr.open("POST", "/settings.html?save=" + jsonFormInfo, true);
+            /* window.alert("Json function send end"); */
+            xhr.send();
+            window.alert("Gespeichert!");
+        }   
+    </script>
+    </p>  
+
+    <p class="label">Nach &Auml;nderungen neu starten!</p>
+    
+    <button class="button" onclick="reboot_handler()">Neustart</button>
+    </p>
+
+    <p id="status"></p>
+    <script>
+        function reboot_handler() 
+        {
+        document.getElementById("status").innerHTML = "Invoking Reboot ...";
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/reboot", true);
+        xhr.send();
+        setTimeout(function(){ window.open("/reboot","_self"); }, 500);
+        }
+    </script>
+
+    </br>
+
+    <ul class="bottomnav">
+        <li><a href="/">Home</a></li>
+        <li><a href="modbus.html">Modbus</a></li>
+        <li><a class="active" href="settings.html">Settings</a></li>
+        <li><a href="system.html">System</a></li>
+        <li class="right"><a href="ueber.html">About</a></li>
+    </ul>
+</body>
+</html >
