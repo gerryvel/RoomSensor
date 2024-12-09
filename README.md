@@ -12,20 +12,16 @@ The HTML Data upload separately.
 # Partlist:
 
 - Espressiv ESP32-C3-DevkitM1
-
+- BME 280
 - Traco-Power TSR 1-2450 for 12V / 5V [Link](https://www.reichelt.de/dc-dc-wandler-tsr-1-1-w-5-v-1000-ma-sil-to-220-tsr-1-2450-p116850.html?search=tsr+1-24)
-
 
 
 # Wiring diagram
 
-![grafik](https://github.com/gerryvel/Bootsdaten/assets/17195231/5571a0f5-8a37-4b18-a9da-5ba11bb2f8b1)
+
 
 # PCB and Housing assembly
 
-
-
-PCB by Aisler [Link](https://aisler.net/p/NZFHAMAJ)
 
 # Webinterface
 
