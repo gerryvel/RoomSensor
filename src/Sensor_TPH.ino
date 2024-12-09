@@ -64,15 +64,18 @@ void setup()
 	File root = LittleFS.open("/");
   listDir(LittleFS, "/", 3);
   readConfig("/config.json");
-	CL_SSID = tWeb_Config.wAP_SSID;               // read connectdata
+  // read connectdata
+	CL_SSID = tWeb_Config.wAP_SSID;               
 	CL_PASSWORD = tWeb_Config.wAP_Password;
-  Sensortyp = tWeb_Config.wBMP_Sensortype;      //read sensortype
+  //read sensortype
+  Sensortyp = tWeb_Config.wBMP_Sensortype; 
+  // read client data
   CL_IP = inet_addr(tWeb_Config.wClient_IP);
   CL_Gateway = inet_addr(tWeb_Config.wClient_Gateway);
   CL_NMask = inet_addr(tWeb_Config.wClient_NMask);
   CL_DNS = inet_addr(tWeb_Config.wClient_DNS);
-  Serial.println("Configdata:\n Client SSID: " + CL_SSID + " , Passwort: " + CL_PASSWORD + " , Sensortyp: " + Sensortyp);
-  Serial.println("Clientdata:\n Client IP: " + CL_IP.toString() + " , Client Netzmaske: " + CL_NMask.toString() + " , Client Gateway: " + CL_Gateway.toString() + " , Client DNS: " + CL_DNS.toString());
+  Serial.println("Configdata:\n Client SSID: " + CL_SSID + ", Passwort: " + CL_PASSWORD + ", Sensortyp: " + Sensortyp);
+  Serial.println("Clientdata:\n Client IP: " + CL_IP.toString() + ", Netmask: " + CL_NMask.toString() + ", Gateway: " + CL_Gateway.toString() + ", DNS: " + CL_DNS.toString());
 
   freeHeapSpace();
 
@@ -101,7 +104,7 @@ void setup()
     WiFi.softAPConfig(IP, Gateway, NMask);
     Serial.println("");
     Serial.println("\nAccessspoint " + String(AP_SSID) + " running");
-    Serial.println("\nAccessspiont IP " + IP.toString() + " ,GW: " + Gateway.toString() + " ,Mask: " + NMask.toString() + " set");
+    Serial.println("\nAccessspiont IP " + IP.toString() + ", GW: " + Gateway.toString() + ", Mask: " + NMask.toString() + " set");
     //LEDboard(Green);
     delay(1000);
     //LEDboard(Black);
@@ -147,7 +150,7 @@ WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
   if (WiFi.config(CL_IP, CL_Gateway, CL_NMask, CL_DNS) == false) {
     Serial.println("Client configuration failed.");
   } else {
-    Serial.println("Client configured with IP:" + CL_IP.toString() + " , Netmask:" + CL_NMask.toString() + " , Gateway:" + CL_Gateway.toString() + " ,DNS:" + CL_DNS.toString());
+    Serial.println("Client configured with IP:" + CL_IP.toString() + ", Netmask:" + CL_NMask.toString() + ", Gateway:" + CL_Gateway.toString() + ", DNS:" + CL_DNS.toString());
   }
   delay(500);    
 

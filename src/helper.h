@@ -33,7 +33,7 @@ void freeHeapSpace(){
 void WiFiDiag(void) {
   Serial.println("\nWifi-Diag:");
   AP_IP = WiFi.softAPIP();
-  CL_IP = WiFi.localIP();
+  //CL_IP = WiFi.localIP();
   Serial.print("AP IP address: ");
   Serial.println(AP_IP.toString());
   Serial.print("Client IP address: ");
