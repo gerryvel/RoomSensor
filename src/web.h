@@ -35,6 +35,15 @@ String processor(const String& var)
 		buttons += "<p class=\"CInput\"><label>Client IP </label><input type = \"text\" name = \"Client_IP\" value=\"";
 		buttons += tWeb_Config.wClient_IP;
 		buttons += "\"/></p>";
+		buttons += "<p class=\"CInput\"><label>Client Gateway </label><input type = \"text\" name = \"Client_Gateway\" value=\"";
+		buttons += tWeb_Config.wClient_Gateway;
+		buttons += "\"/></p>";
+		buttons += "<p class=\"CInput\"><label>Client Netmask </label><input type = \"text\" name = \"Client_NMask\" value=\"";
+		buttons += tWeb_Config.wClient_NMask;
+		buttons += "\"/></p>";
+		buttons += "<p class=\"CInput\"><label>Client DNS </label><input type = \"text\" name = \"Client_DNS\" value=\"";
+		buttons += tWeb_Config.wClient_DNS;
+		buttons += "\"/></p>";
 		buttons += "<p><input type=\"submit\" value=\"Speichern\"></p>";
 		buttons += "</form>";
 		return buttons;

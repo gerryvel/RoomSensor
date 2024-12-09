@@ -121,7 +121,9 @@ void readConfig(String filename) {
 			strcpy(tWeb_Config.wAP_Password, testDocument["Password"] | "schmilka200");
       strcpy(tWeb_Config.wBMP_Sensortype, testDocument["BMP"] | "");
       strcpy(tWeb_Config.wClient_IP, testDocument["Client_IP"] | "");
-			Serial.println(tWeb_Config.wAP_SSID);
+      strcpy(tWeb_Config.wClient_NMask, testDocument["Client_NMask"] | "");
+      strcpy(tWeb_Config.wClient_Gateway, testDocument["Client_Gateway"] | "");
+      strcpy(tWeb_Config.wClient_DNS, testDocument["Client_DNS"] | "");
 		}
 		configFile.close();
 		Serial.println("Config - Datei geschlossen");

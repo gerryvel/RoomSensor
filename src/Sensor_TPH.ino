@@ -64,11 +64,15 @@ void setup()
 	File root = LittleFS.open("/");
   listDir(LittleFS, "/", 3);
   readConfig("/config.json");
-	CL_SSID = tWeb_Config.wAP_SSID;
+	CL_SSID = tWeb_Config.wAP_SSID;               // read connectdata
 	CL_PASSWORD = tWeb_Config.wAP_Password;
-  Sensortyp = tWeb_Config.wBMP_Sensortype;
+  Sensortyp = tWeb_Config.wBMP_Sensortype;      //read sensortype
   CL_IP = inet_addr(tWeb_Config.wClient_IP);
-  Serial.println("Configdata:\n Client SSID: " + CL_SSID + " , Passwort: " + CL_PASSWORD + " , Sensortyp: " + Sensortyp+ " , Client IP: " + CL_IP);
+  CL_Gateway = inet_addr(tWeb_Config.wClient_Gateway);
+  CL_NMask = inet_addr(tWeb_Config.wClient_NMask);
+  CL_DNS = inet_addr(tWeb_Config.wClient_DNS);
+  Serial.println("Configdata:\n Client SSID: " + CL_SSID + " , Passwort: " + CL_PASSWORD + " , Sensortyp: " + Sensortyp);
+  Serial.println("Clientdata:\n Client IP: " + CL_IP.toString() + " , Client Netzmaske: " + CL_NMask.toString() + " , Client Gateway: " + CL_Gateway.toString() + " , Client DNS: " + CL_DNS.toString());
 
   freeHeapSpace();
 
@@ -96,8 +100,8 @@ void setup()
   if(WiFi.softAP(AP_SSID, AP_PASSWORD, channel, hide_SSID, max_connection)){
     WiFi.softAPConfig(IP, Gateway, NMask);
     Serial.println("");
-    Serial.println("\nNetwork " + String(AP_SSID) + " running");
-    Serial.println("\nNetwork IP " + IP.toString() + " ,GW: " + Gateway.toString() + " ,Mask: " + NMask.toString() + " set");
+    Serial.println("\nAccessspoint " + String(AP_SSID) + " running");
+    Serial.println("\nAccessspiont IP " + IP.toString() + " ,GW: " + Gateway.toString() + " ,Mask: " + NMask.toString() + " set");
     //LEDboard(Green);
     delay(1000);
     //LEDboard(Black);
@@ -117,16 +121,17 @@ WiFiDiag();
 Serial.println("Client Connection");
   WiFi.disconnect(true);
   delay(1000);   
+
   int count = 0; // Init Counter WFIConnect  
   Serial.println("\nClient " + String(CL_SSID) + ", " + String(CL_PASSWORD) + " connect");
 
 WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
   while (WiFi.status() != WL_CONNECTED)
-  {
-    //LEDon(LED(Blue));
+  {   
+    neopixelWrite(LED_BUILTIN,0,0,RGB_BRIGHTNESS);
     delay(500);
     Serial.print(".");
-    //LEDflash(LED(Red));
+    neopixelWrite(LED_BUILTIN,0,0,0);
    count++;
     if (count = 10) break;
   }
@@ -138,6 +143,13 @@ WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
     Serial.println("Client Connection failed");
     //LEDoff(LED(Blue));
     WiFi.reconnect(); 
+
+  if (WiFi.config(CL_IP, CL_Gateway, CL_NMask, CL_DNS) == false) {
+    Serial.println("Client configuration failed.");
+  } else {
+    Serial.println("Client configured with IP:" + CL_IP.toString() + " , Netmask:" + CL_NMask.toString() + " , Gateway:" + CL_Gateway.toString() + " ,DNS:" + CL_DNS.toString());
+  }
+  delay(500);    
 
 // Start OTA
   ArduinoOTA
@@ -199,7 +211,7 @@ WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
   bmp3xx.setOutputDataRate(BMP3_ODR_50_HZ); 
   }
 
-mb.server();
+  mb.server();
   mb.addHreg(Sensor_HREG, 0, 10);
 
 // MDNS
@@ -210,6 +222,7 @@ mb.server();
   website();
   
 }
+
 //=================================== Loop ==============================//
 void loop()
 { 
@@ -233,9 +246,9 @@ void loop()
       //LEDoff(LED(Green));
       WiFi.reconnect();    // wifi down, reconnect here
       delay(500);
-      int WLcount = 0;
-     int UpCount = 0;
-      while (WiFi.status() != WL_CONNECTED && WLcount < 50){
+        int UpCount = 0;
+        int WLCount = 0;
+      while (WiFi.status() != WL_CONNECTED && WLCount < 50){
         delay(50);
         Serial.printf(".");
         //LEDflash(LED(Red));
@@ -246,7 +259,7 @@ void loop()
           Serial.printf("\n");
         }
         ++UpCount;
-        ++WLcount;
+        ++WLCount;
       }
     }
   }

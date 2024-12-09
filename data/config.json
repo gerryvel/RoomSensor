@@ -1,5 +1,8 @@
 {   "SSID": "sebbwlan",
     "Passwort": "schmilka200",
     "BMP": "1",
-    "Client_IP": "192.168.0.118"
+    "Client_IP": "192.168.0.118",
+    "Client_Gateway": "192.168.0.254",
+    "Client_NMask": "255.255.255.0",
+    "Client_DNS": "192.168.0.254"
 }

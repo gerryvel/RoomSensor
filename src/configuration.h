@@ -17,7 +17,7 @@ struct Web_Config
 	char wAP_Password[12];
 	char wBMP_Sensortype[1];
 	char wClient_IP[16];
-	char wClient_Mask[16];
+	char wClient_NMask[16];
 	char wClient_Gateway[16];
 	char wClient_DNS[16];
 };
@@ -40,7 +40,6 @@ IPAddress CL_IP = IPAddress();
 IPAddress CL_NMask = IPAddress();
 IPAddress CL_Gateway = IPAddress();
 IPAddress CL_DNS = IPAddress();
-IPAddress SELF_IP;
 
 //Configuration Client (Network Data Windsensor)
 //#define 

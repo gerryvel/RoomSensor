@@ -29,12 +29,18 @@
             var Password = form.Password.value;
             var BMP = form.BMP.value;
             var Client_IP  = form.Client_IP;
+            var Client_Gateway  = form.Client_Gateway;
+            var Client_NMask  = form.Client_NMask;
+            var Client_DNS  = form.Client_DNS;
 
             var jsonFormInfo = JSON.stringify({
                 SSID: SSID,
                 Password: Password,
                 BMP: BMP,
                 Client_IP: Client_IP,
+                Client_Gateway: Client_Gateway,
+                Client_NMask: Client_NMask,
+                Client_DNS: Client_DNS
             });
 
             xhr.open("POST", "/settings.html?save=" + jsonFormInfo, true);
@@ -61,7 +67,7 @@
         setTimeout(function(){ window.open("/reboot","_self"); }, 500);
         }
     </script>
-
+    </br>
     </br>
 
     <ul class="bottomnav">
