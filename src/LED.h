@@ -1,108 +1,38 @@
 #include "arduino.h"
 #include "task.h"
-#include <FastLED.h>
 
-//Configuration LED
-//const int LEDBoard = 2;  //DevModule
-//const int LEDBoard = 13;   //Adafruit Huzzah32
-
-/*
-enum LED {Red = 25, Green = 26, Blue = 33};
-
-
-void LEDblink(int PIN = LEDboard()){
- taskBegin();
-   while(1)   // blockiert dank der TaskPause nicht 
-   {
-      digitalWrite(PIN,HIGH);  // LED ein
-      taskPause(5);   // gibt Rechenzeit ab         
-      digitalWrite(PIN,LOW);   // LED aus
-      taskPause(1000);   // gibt Rechenzeit ab         
-   }
-   taskEnd();   
-}
-
-void LEDflash(int PIN = LED()){
-   taskBegin();
-   while(1)   // blockiert dank der TaskPause nicht 
-   {
-      digitalWrite(PIN,HIGH);  // LED ein
-      taskPause(5);   // gibt Rechenzeit ab    
-      digitalWrite(PIN,LOW);   // LED aus
-      taskPause(250);   // gibt Rechenzeit ab    
-   }
-   taskEnd();   
-}
-
-// Flash LED for x ms
-void flashLED(int PIN = LED(), int duration = 0){
- digitalWrite(PIN, HIGH); 
- delay(duration);
- digitalWrite(PIN, LOW);
-}
-
-void LEDInit() {                        // Start Initialisierung
-  pinMode(LED(Red),   OUTPUT);
-  pinMode(LED(Blue),  OUTPUT);
-  pinMode(LED(Green), OUTPUT);
-  digitalWrite(LED(Red), HIGH);
-  delay(250);
-  digitalWrite(LED(Red), LOW);
-  digitalWrite(LED(Blue), HIGH);
-  delay(250);
-  digitalWrite(LED(Blue), LOW);
-  digitalWrite(LED(Green), HIGH);
-  delay(250);
-  digitalWrite(LED(Green), LOW);
-}
-
-void LEDon(int PIN = LED()) {
-  digitalWrite(PIN, HIGH);    
-}
-
-void LEDoff(int PIN = LED()) {
-  digitalWrite(PIN, LOW);
-}
-
-void LEDoff_RGB() {
-  digitalWrite(LED(Blue), LOW);
-  digitalWrite(LED(Green),LOW);
-  digitalWrite(LED(Red), LOW);
-}
-*/
-
-CRGB leds[1];
 
 enum LEDcolor {
   Red = 1, 
   Green = 2, 
   Blue = 3,
   White = 4,
-  Black = 5
+  Clear = 5
   };
 
 void LEDboard(int color = LEDcolor())
 {
-  if (color = 1){
-    leds[0] = CRGB::Red;    
-    FastLED.show();
+  switch (color){
+  case 1:
+    neopixelWrite(LED_BUILTIN,RGB_BRIGHTNESS,0,0);
+    break;
+  case 2:
+    neopixelWrite(LED_BUILTIN,0,RGB_BRIGHTNESS,0);
+    break;
+  case 3:  
+    neopixelWrite(LED_BUILTIN,0,0,RGB_BRIGHTNESS);
+    break;
+  case 4:
+    neopixelWrite(LED_BUILTIN,RGB_BRIGHTNESS,RGB_BRIGHTNESS,RGB_BRIGHTNESS);
+    break;
+  case 5:
+    neopixelWrite(LED_BUILTIN,0,0,0);
+    break; 
+  default:
+    neopixelWrite(LED_BUILTIN,0,0,0);
+    break;
   }
-  if (color = 2){
-    leds[0] = CRGB::Green;
-    FastLED.show();
-  }
-  if (color = 3){
-    leds[0] = CRGB::Blue;
-    FastLED.show();
-  }
-  if (color = 4){
-    leds[0] = CRGB::Black;
-    FastLED.show();
-  }
-if (color = 5){
-    leds[0] = CRGB::White;
-    FastLED.show();
-  }
+
 }
 
 void LEDinitBoard()
@@ -115,9 +45,24 @@ void LEDinitBoard()
   delay(250);
   LEDboard(White);
   delay(250);
-  LEDboard(Black);
-  delay(250);
+  LEDboard(Clear);
 }
 
+// Flash LED for x ms
+void flashLED(int color = LEDcolor(), int duration = 0){
+ LEDboard(color); 
+ delay(duration);
+ LEDboard(Clear);
+}
 
-
+void LEDflash(int color = LEDcolor()){
+   taskBegin();
+   while(1)   // blockiert dank der TaskPause nicht 
+   {
+      LEDboard(color);  // LED ein
+      taskPause(5);   // gibt Rechenzeit ab    
+      LEDboard(Clear);   // LED aus
+      taskPause(3000);   // gibt Rechenzeit ab    
+   }
+   taskEnd(); 
+}

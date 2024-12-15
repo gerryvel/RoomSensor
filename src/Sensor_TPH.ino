@@ -25,7 +25,6 @@
 #include <Adafruit_BMP3XX.h>
 #include <Adafruit_BMP280.h>
 #include <Adafruit_BME280.h>
-#include <FastLED.h>
 #include <wire.h>
 #include <Preferences.h>
 #include <WiFi.h>
@@ -88,11 +87,8 @@ void setup()
   #else
  Serial.println("no RGB_BUILTIN");
  #endif
-
-//LED
-  FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
-  FastLED.setBrightness(BRIGHTNESS);
   
+LEDinitBoard();
 
 // Boardinfo	
   sBoardInfo = boardInfo.ShowChipIDtoString();
@@ -107,7 +103,7 @@ void setup()
     Serial.println("\nAccessspiont IP " + IP.toString() + ", GW: " + Gateway.toString() + ", Mask: " + NMask.toString() + " set");
     //LEDboard(Green);
     delay(1000);
-    //LEDboard(Black);
+    //LEDboard(Clear);
   } else {
       Serial.println("Starting AP failed.");
       //LEDboard(Red);
@@ -131,7 +127,7 @@ Serial.println("Client Connection");
 WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
   while (WiFi.status() != WL_CONNECTED)
   {   
-    neopixelWrite(LED_BUILTIN,0,0,RGB_BRIGHTNESS);
+    LEDboard(Blue);
     delay(500);
     Serial.print(".");
     neopixelWrite(LED_BUILTIN,0,0,0);
@@ -239,7 +235,8 @@ void loop()
       CL_NMask = WiFi.subnetMask();
       CL_Gateway = WiFi.gatewayIP();
       CL_DNS = WiFi.dnsIP();
-      //flashLED(LED(Green), 5);
+      // flashLED(Green, 2);
+      LEDflash(Green);
       delay(100);
     }
     else{
@@ -254,8 +251,7 @@ void loop()
       while (WiFi.status() != WL_CONNECTED && WLCount < 50){
         delay(50);
         Serial.printf(".");
-        //LEDflash(LED(Red));
-        //flashLED(LED(Red), 5);
+        flashLED(Red, 5);
         if (UpCount >= 20)  // just keep terminal from scrolling sideways
         {
           UpCount = 0;
