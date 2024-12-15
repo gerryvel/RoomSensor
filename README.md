@@ -1,4 +1,4 @@
-#BD Sensor Modul
+#Room Sensor Modul
 
 The ESP32 in this project is an ESP32C3. This is a small module with USB connector.
 
