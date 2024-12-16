@@ -51,10 +51,11 @@ void setup()
 {
   Serial.begin(115200);
 
-  Serial.printf("TPW Sensor setup %s start\n", Version);
+  Serial.printf("Room Sensor setup %s start\n", Version);
 
 // Set the CPU frequency to 80 MHz for consumption optimization
   setCpuFrequencyMhz(80);
+  Serial.println("CPU Frequency: " + getCpuFrequencyMhz());
 
 //Filesystem
 	if (!LittleFS.begin(true)) {
