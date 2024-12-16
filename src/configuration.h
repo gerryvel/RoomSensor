@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 // Versionierung
-#define Version "V0.9 vom 11.11.2024"  // Version
+#define Version "V1.0 vom 16.12.2024"  // Version
 
 //Configuration Web Page 
 #define PAGE_REFRESH 10 // x Sec.

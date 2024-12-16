@@ -14,7 +14,7 @@
   NMEA2000 Temperature and Barometric Pressure with BMP280 or 388.
   Reads messages from NMEA0183 WindSensor and forwards them to the N2k bus.
 
-  V2.4 vom 11.10.2024, gerryvel Gerry Sebb
+  V1.0 vom 16.12.2024, gerryvel Gerry Sebb
 */
 
 #include <Arduino.h>
@@ -52,6 +52,9 @@ void setup()
   Serial.begin(115200);
 
   Serial.printf("TPW Sensor setup %s start\n", Version);
+
+// Set the CPU frequency to 80 MHz for consumption optimization
+  setCpuFrequencyMhz(80);
 
 //Filesystem
 	if (!LittleFS.begin(true)) {
