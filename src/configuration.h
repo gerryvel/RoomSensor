@@ -84,6 +84,6 @@ int Reg4 = 0;	// Spannung
 // ADC
 const int ADCpin1 = 1; // Voltage measure is connected GPIO 1 (Analog ADC1_1)
 float BoardSpannung = 0;
-#define ADC_Calibration_Value1 26.8  // The real value depends on the true resistor values for the ADC input (110K / 11 K)
+#define ADC_Calibration_Value1 27.0 // The real value depends on the true resistor values for the ADC input (110K / 11 K)
 
 #endif  
