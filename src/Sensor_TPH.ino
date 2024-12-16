@@ -235,7 +235,6 @@ void loop()
       CL_NMask = WiFi.subnetMask();
       CL_Gateway = WiFi.gatewayIP();
       CL_DNS = WiFi.dnsIP();
-      // flashLED(Green, 2);
       LEDflash(Green);
       delay(100);
     }
@@ -300,7 +299,6 @@ ArduinoOTA.handle();
     Serial.printf("Luftdruck   : %4.2f mbar\n", fbmx_pressure/100);
     Serial.printf("Luftfeuchte : %4.1f %\n", fbmx_humidity);
     Serial.printf("Höhe        : %4.1f m\n", fbmx_altitude);
-    //flashLED(LED(Blue), 5);
   }
 
   if (Sensortyp == 2)
@@ -309,7 +307,7 @@ ArduinoOTA.handle();
     {       
       Serial.println("BMP 3xx reading error");
       sBMP_Status = "BMP Lesefehler";
-      //LEDflash(LED(Blue));
+      flashLED(Red, 2);
     } else 
     {
       Serial.println("BMP 3xx read successful");
@@ -317,8 +315,6 @@ ArduinoOTA.handle();
       fbmx_pressure = bmp3xx.readPressure();
       fbmx_temperature = bmp3xx.readTemperature();
       fbmx_altitude = bmp3xx.readAltitude(SEALEVELPRESSURE_HPA);
-      // LEDblink(LED(Blue));
-      //flashLED(LED(Blue), 5);
       delay(100);
     }
   }
