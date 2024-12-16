@@ -36,6 +36,7 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h> 
 #include "web.h"
+#include "analog.h"
 #include <ModbusIP_ESP8266.h>
 
 // BMP
@@ -328,6 +329,9 @@ ArduinoOTA.handle();
 
 WebReboot();  
 
+BoardSpannung = ((BoardSpannung * 15) + (ReadVoltage(ADCpin1) * ADC_Calibration_Value1 / 4096)) / 16; // This implements a low pass filter to eliminate spike for ADC readings
+Serial.printf("Spannung  : %3.2f V\n", BoardSpannung);
+
 mb.task();
    delay(10);
 
@@ -335,10 +339,11 @@ mb.task();
   Reg1 = fbmx_pressure/100;
   Reg2 = fbmx_humidity*10;
   Reg3 = fbmx_altitude;
+  Reg4 = BoardSpannung*100;
 
   mb.Hreg(100, Reg0);   // Value in xx,x °C 
-  mb.Hreg(101, Reg1);    // Value in xxxx mbar
-  mb.Hreg(102, Reg2);    // Value in xx.x %
-  mb.Hreg(103, Reg3);
-
+  mb.Hreg(101, Reg1);   // Value in xxxx mbar
+  mb.Hreg(102, Reg2);   // Value in xx.x %
+  mb.Hreg(103, Reg3);   // Value in xxxx m
+  mb.Hreg(104, Reg4);   // Value in xx.xx V
 }
