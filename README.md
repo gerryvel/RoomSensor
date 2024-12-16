@@ -1,4 +1,4 @@
-#BD Sensor Modul
+#Room Sensor Modul
 
 The ESP32 in this project is an ESP32C3. This is a small module with USB connector.
 
@@ -24,6 +24,11 @@ The HTML Data upload separately.
 
 
 # Webinterface
+
+<img width="1080" alt="image" src="https://github.com/user-attachments/assets/b9d54b22-bd9d-4a3b-9983-1489b16eb7a9" />
+<img width="1080" alt="image" src="https://github.com/user-attachments/assets/76e7ed92-e2f1-4aca-aae2-e641b5249f7e" />
+<img width="1080" alt="image" src="https://github.com/user-attachments/assets/a76b5d52-b510-472e-954c-a52bf90fcb06" />
+<img width="1080" alt="image" src="https://github.com/user-attachments/assets/5fa71013-38e1-4a74-ab89-2a668cdcb6f8" />
 
 
 # Versions
