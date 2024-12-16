@@ -55,7 +55,10 @@ void setup()
 
 // Set the CPU frequency to 80 MHz for consumption optimization
   setCpuFrequencyMhz(80);
-  Serial.println("CPU Frequency: " + getCpuFrequencyMhz());
+  uint16_t Freq = getCpuFrequencyMhz();
+  Serial.print("CPU Freq = ");
+  Serial.print(Freq);
+  Serial.println(" MHz");
 
 //Filesystem
 	if (!LittleFS.begin(true)) {
