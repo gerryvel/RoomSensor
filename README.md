@@ -3,12 +3,13 @@
 The ESP32 in this project is an ESP32C3. This is a small module with USB connector.
 The Sensors is a BME280 for Temperatur, pressure and humidity.
 It's Webinterface and Modbus available. 
-The Modbus-server has 5 Register:
+The Modbus-server has 6 Register:
 - temperatur
 - pressure
 - humidity
 - altitude
 - voltage (batterie)
+- Set "True" from client: enable Deep-Sleep-Modus for 1 min
 
 The 12 Volt is reduced 10-26 Volt to 5 Volt with a DC Step-Down_Converter for connect to wired power. 
 Also is a Batterie inserted in the housing and measurement for this voltage.
