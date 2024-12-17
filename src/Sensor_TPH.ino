@@ -337,7 +337,7 @@ mb.task();
 delay(500);
 
 // Sleep start, mb.Reg5 must be true !
-if (mb.Hreg(105) == 1){
+if (mb.onGetHreg(105) == 1){
     Serial.println("\nGo to Deep-Sleep-Modus for 1 minute");
       esp_sleep_enable_timer_wakeup(60000000); // 60.000.000 Mikrosekunden = 1 Minute
       esp_deep_sleep_start();
