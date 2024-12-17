@@ -46,6 +46,7 @@ PCB by Aisler [Link](https://aisler.net/p/JVQKQVUK)
 
 # Versions
 
+- 1.2 add Modbusregister to switch DeepSleepModus on
 - 1.1 add batterie voltage measurement
 - 1.0 working Version
 

@@ -292,7 +292,7 @@ ArduinoOTA.handle();
     fbmx_altitude = bme280.readAltitude(SEALEVELPRESSURE_HPA);
     Serial.printf("Temperatur  : %3.1f °C\n", fbmx_temperature);
     Serial.printf("Luftdruck   : %4.2f mbar\n", fbmx_pressure/100);
-    Serial.printf("Luftfeuchte : %4.1f %\n", fbmx_humidity);
+    Serial.printf("Luftfeuchte : %4.1f %%\n", fbmx_humidity);
     Serial.printf("Höhe        : %4.1f m\n", fbmx_altitude);
   }
 
@@ -322,27 +322,28 @@ Serial.printf("Spannung  : %3.2f V\n", BoardSpannung);
 mb.task();
    delay(10);
 
-  Reg0 = fbmx_temperature*10;
-  Reg1 = fbmx_pressure/100;
-  Reg2 = fbmx_humidity*10;
-  Reg3 = fbmx_altitude;
-  Reg4 = BoardSpannung*100;
+  RegVal0 = fbmx_temperature*10;
+  RegVal1 = fbmx_pressure/100;
+  RegVal2 = fbmx_humidity*10;
+  RegVal3 = fbmx_altitude;
+  RegVal4 = BoardSpannung*100;
 
-  mb.Hreg(100, Reg0);   // Value in xx,x °C 
-  mb.Hreg(101, Reg1);   // Value in xxxx mbar
-  mb.Hreg(102, Reg2);   // Value in xx.x %
-  mb.Hreg(103, Reg3);   // Value in xxxx m
-  mb.Hreg(104, Reg4);   // Value in xx.xx V
+  mb.Hreg(Reg0, RegVal0);   // Value in xx,x °C 
+  mb.Hreg(Reg1, RegVal1);   // Value in xxxx mbar
+  mb.Hreg(Reg2, RegVal2);   // Value in xx.x %
+  mb.Hreg(Reg3, RegVal3);   // Value in xxxx m
+  mb.Hreg(Reg4, RegVal4);   // Value in xx.xx V
 
 delay(500);
 
 // Sleep start, mb.Reg5 must be true !
-if (mb.onGetHreg(105) == 1){
-    Serial.println("\nGo to Deep-Sleep-Modus for 1 minute");
-      esp_sleep_enable_timer_wakeup(60000000); // 60.000.000 Mikrosekunden = 1 Minute
+if (mb.onGetHreg(Reg5) == 1){
+    Serial.printf("\nModbus Signal for Deep-Sleep is %i \n", mb.onGetHreg(Reg5));
+    Serial.printf("\nGo to Deep-Sleep-Mode for %i seconds", Sleeptime/1000000 );
+      esp_sleep_enable_timer_wakeup(Sleeptime); 
       esp_deep_sleep_start();
 } else {
-    Serial.println("\nNo modbus Signal for Deep-Sleep\n");
+    Serial.printf("\nModbus Signal for Deep-Sleep is %i \n", mb.onGetHreg(Reg5));
 }
 
 

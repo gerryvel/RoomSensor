@@ -73,11 +73,11 @@ String replaceVariable(const String& var){
   	if (var == "sCL_PASSWORD")return String(CL_PASSWORD);
 	if (var == "sBMP")return String(sBMP);
 	if (var == "sModbusOffset")return String(Sensor_HREG);
-	if (var == "sReg0")return String(Reg0);
-	if (var == "sReg1")return String(Reg1);
-	if (var == "sReg2")return String(Reg2);
-	if (var == "sReg3")return String(Reg3);
-	if (var == "sReg4")return String(Reg4);
+	if (var == "sReg0")return String(RegVal0);
+	if (var == "sReg1")return String(RegVal1);
+	if (var == "sReg2")return String(RegVal2);
+	if (var == "sReg3")return String(RegVal3);
+	if (var == "sReg4")return String(RegVal4);
 	if (var == "sVersion")return Version;
   	if (var == "CONFIGPLACEHOLDER")return processor(var);
   return "NoVariable";

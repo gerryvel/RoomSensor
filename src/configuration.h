@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 // Versionierung
-#define Version "V1.0 vom 16.12.2024"  // Version
+#define Version "V1.2 vom 17.12.2024"  // Version
 
 //Configuration Web Page 
 #define PAGE_REFRESH 10 // x Sec.
@@ -68,12 +68,19 @@ String sBMP = "";
 
 //Modbus
 const int Sensor_HREG = 100;  // Modbus Registers Offsets
-int Reg0 = 0;	// Temperatur
-int Reg1 = 0;	// Pressure
-int Reg2 = 0;	// Hum
-int Reg3 = 0;	// Altitude
-int Reg4 = 0;	// Spannung
-int Reg5 = 0; 	// config	1 = Deepsleep on
+int Reg0 = Sensor_HREG + 0;
+int Reg1 = Sensor_HREG + 1;
+int Reg2 = Sensor_HREG + 2;
+int Reg3 = Sensor_HREG + 3;
+int Reg4 = Sensor_HREG + 4;
+int Reg5 = Sensor_HREG + 5; 	// config	1 = Deepsleep on
+
+int RegVal0 = 0;	// Temperatur
+int RegVal1 = 0;	// Pressure
+int RegVal2 = 0;	// Hum
+int RegVal3 = 0;	// Altitude
+int RegVal4 = 0;	// Spannung
+
 
 // RGB LED buildin
 #define LED_PIN     8 //Pin 46 on Thing Plus C S3 is connected to WS2812 LED
@@ -86,5 +93,8 @@ int Reg5 = 0; 	// config	1 = Deepsleep on
 const int ADCpin1 = 1; // Voltage measure is connected GPIO 1 (Analog ADC1_1)
 float BoardSpannung = 0;
 #define ADC_Calibration_Value1 27.0 // The real value depends on the true resistor values for the ADC input (110K / 11 K)
+
+// Deepsleep
+int Sleeptime = 60000000;   // 60.000.000 Mikrosekunden = 1 Minute
 
 #endif  
