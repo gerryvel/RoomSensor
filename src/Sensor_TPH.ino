@@ -112,7 +112,9 @@ void setup()
   WiFi.hostname(HostName);
   Serial.println("Set Hostname done");
 
-WiFiDiag();
+  if (mb.onGetHreg(Reg5) == 0){
+        WiFiDiag();
+  }
 
 // Anmelden mit WiFi als Client 
 Serial.println("Client connection");
