@@ -1,7 +1,6 @@
 #include "arduino.h"
 #include "task.h"
 
-
 enum LEDcolor {
   Red = 1, 
   Green = 2, 
@@ -14,16 +13,16 @@ void LEDboard(int color = LEDcolor())
 {
   switch (color){
   case 1:
-    neopixelWrite(LED_BUILTIN,RGB_BRIGHTNESS,0,0);
+    neopixelWrite(LED_BUILTIN,20,0,0);
     break;
   case 2:
-    neopixelWrite(LED_BUILTIN,0,RGB_BRIGHTNESS,0);
+    neopixelWrite(LED_BUILTIN,0,20,0);
     break;
   case 3:  
-    neopixelWrite(LED_BUILTIN,0,0,RGB_BRIGHTNESS);
+    neopixelWrite(LED_BUILTIN,0,0,20);
     break;
   case 4:
-    neopixelWrite(LED_BUILTIN,RGB_BRIGHTNESS,RGB_BRIGHTNESS,RGB_BRIGHTNESS);
+    neopixelWrite(LED_BUILTIN,20,20,20);
     break;
   case 5:
     neopixelWrite(LED_BUILTIN,0,0,0);

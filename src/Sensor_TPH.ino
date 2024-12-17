@@ -38,6 +38,7 @@
 #include "web.h"
 #include "analog.h"
 #include <ModbusIP_ESP8266.h>
+#include "esp_sleep.h"
 
 // BMP
 Adafruit_BMP280 bmp280;
@@ -90,14 +91,6 @@ void setup()
   Wire.begin(BMP_SDA, BMP_SCL);  // BMP_SDA, BMP_SCL
   I2C_scan();
 
-#ifdef RGB_BUILTIN
-  Serial.println("RGB_BUILTIN");
-  #else
- Serial.println("no RGB_BUILTIN");
- #endif
-  
-LEDinitBoard();
-
 // Boardinfo	
   sBoardInfo = boardInfo.ShowChipIDtoString();
 
@@ -109,12 +102,9 @@ LEDinitBoard();
     Serial.println("");
     Serial.println("\nAccessspoint " + String(AP_SSID) + " running");
     Serial.println("\nAccessspiont IP " + IP.toString() + ", GW: " + Gateway.toString() + ", Mask: " + NMask.toString() + " set");
-    //LEDboard(Green);
     delay(1000);
-    //LEDboard(Clear);
   } else {
       Serial.println("Starting AP failed.");
-      //LEDboard(Red);
       delay(1000); 
       ESP.restart();
   }
@@ -125,7 +115,7 @@ LEDinitBoard();
 WiFiDiag();
 
 // Anmelden mit WiFi als Client 
-Serial.println("Client Connection");
+Serial.println("Client connection");
   WiFi.disconnect(true);
   delay(1000);   
 
@@ -144,10 +134,10 @@ WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
   }
   if (WiFi.isConnected()) {
    bConnect_CL = 1;
-    Serial.println("Client Connected");
+    Serial.println("Client connected");
   }
   else
-    Serial.println("Client Connection failed");
+    Serial.println("Client connection failed");
     //LEDoff(LED(Blue));
     WiFi.reconnect(); 
 
@@ -219,7 +209,7 @@ WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
   }
 
   mb.server();
-  mb.addHreg(Sensor_HREG, 0, 10);
+  mb.addHreg(Sensor_HREG, 0, 20);
 
 // MDNS
   MDNSResponder mdns;
@@ -243,14 +233,12 @@ void loop()
       CL_NMask = WiFi.subnetMask();
       CL_Gateway = WiFi.gatewayIP();
       CL_DNS = WiFi.dnsIP();
-      LEDflash(Green);
       delay(100);
     }
     else{
       Serial.println("Wifi connect failed!\n");
       bConnect_CL = 0;
       Serial.printf("Reconnecting to %s\n", CL_SSID);
-      //LEDoff(LED(Green));
       WiFi.reconnect();    // wifi down, reconnect here
       delay(500);
         int UpCount = 0;
@@ -293,7 +281,6 @@ ArduinoOTA.handle();
     Serial.printf("Temperatur: %3.1f °C\n", fbmx_temperature);
     Serial.printf("Luftdruck : %4.1f mbar\n", fbmx_pressure);
     Serial.printf("Höhe      : %4.1f m\n", fbmx_altitude);
-    //flashLED(LED(Blue), 5);
   }
   if (Sensortyp == 1)
   {
@@ -346,4 +333,17 @@ mb.task();
   mb.Hreg(102, Reg2);   // Value in xx.x %
   mb.Hreg(103, Reg3);   // Value in xxxx m
   mb.Hreg(104, Reg4);   // Value in xx.xx V
+
+delay(500);
+
+// Sleep start, mb.Reg5 must be true !
+if (mb.Hreg(105) == 1){
+    Serial.println("\nGo to Deep-Sleep-Modus for 1 minute");
+      esp_sleep_enable_timer_wakeup(60000000); // 60.000.000 Mikrosekunden = 1 Minute
+      esp_deep_sleep_start();
+} else {
+    Serial.println("\nNo modbus Signal for Deep-Sleep\n");
+}
+
+
 }

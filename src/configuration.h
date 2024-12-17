@@ -73,6 +73,7 @@ int Reg1 = 0;	// Pressure
 int Reg2 = 0;	// Hum
 int Reg3 = 0;	// Altitude
 int Reg4 = 0;	// Spannung
+int Reg5 = 0; 	// config	1 = Deepsleep on
 
 // RGB LED buildin
 #define LED_PIN     8 //Pin 46 on Thing Plus C S3 is connected to WS2812 LED
