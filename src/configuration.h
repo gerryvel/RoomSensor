@@ -67,13 +67,7 @@ String sI2C_Status = "";
 String sBMP = "";
 
 //Modbus
-const int Sensor_HREG = 100;  // Modbus Registers Offsets
-int Reg0 = Sensor_HREG + 0;
-int Reg1 = Sensor_HREG + 1;
-int Reg2 = Sensor_HREG + 2;
-int Reg3 = Sensor_HREG + 3;
-int Reg4 = Sensor_HREG + 4;
-int Reg5 = Sensor_HREG + 5; 	// config	1 = Deepsleep on
+const int Sensor_HREG = 100;  	// Modbus Registers Offsets
 
 int RegVal0 = 0;	// Temperatur
 int RegVal1 = 0;	// Pressure
@@ -95,6 +89,7 @@ float BoardSpannung = 0;
 #define ADC_Calibration_Value1 27.0 // The real value depends on the true resistor values for the ADC input (110K / 11 K)
 
 // Deepsleep
-int Sleeptime = 60000000;   // 60.000.000 Mikrosekunden = 1 Minute
+double Sleeptime = 60000000;   // 60.000.000 Mikrosekunden = 1 Minute
+int UpCount = 0;
 
 #endif  

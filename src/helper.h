@@ -221,7 +221,7 @@ void I2C_scan(void){
     sI2C_Status = "Nichts gefunden";
   }
   else {
-    Serial.println("done\n");
+    Serial.println("I2C scan done\n");
   }
 }
 

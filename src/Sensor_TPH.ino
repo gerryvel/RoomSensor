@@ -112,7 +112,7 @@ void setup()
   WiFi.hostname(HostName);
   Serial.println("Set Hostname done");
 
-  if (mb.onGetHreg(Reg5) == 0){
+  if (mb.onGetHreg(105) == 0){
         WiFiDiag();
   }
 
@@ -330,23 +330,38 @@ mb.task();
   RegVal3 = fbmx_altitude;
   RegVal4 = BoardSpannung*100;
 
-  mb.Hreg(Reg0, RegVal0);   // Value in xx,x °C 
-  mb.Hreg(Reg1, RegVal1);   // Value in xxxx mbar
-  mb.Hreg(Reg2, RegVal2);   // Value in xx.x %
-  mb.Hreg(Reg3, RegVal3);   // Value in xxxx m
-  mb.Hreg(Reg4, RegVal4);   // Value in xx.xx V
+  mb.Hreg(100, RegVal0);   // Value in xx,x °C 
+  mb.Hreg(101, RegVal1);   // Value in xxxx mbar
+  mb.Hreg(102, RegVal2);   // Value in xx.x %
+  mb.Hreg(103, RegVal3);   // Value in xxxx m
+  mb.Hreg(104, RegVal4);   // Value in xx.xx V
 
-delay(500);
+delay(100);
 
-// Sleep start, mb.Reg5 must be true !
-if (mb.onGetHreg(Reg5) == 1){
-    Serial.printf("\nModbus Signal for Deep-Sleep is %i \n", mb.onGetHreg(Reg5));
-    Serial.printf("\nGo to Deep-Sleep-Mode for %i seconds", Sleeptime/1000000 );
-      esp_sleep_enable_timer_wakeup(Sleeptime); 
-      esp_deep_sleep_start();
-} else {
-    Serial.printf("\nModbus Signal for Deep-Sleep is %i \n", mb.onGetHreg(Reg5));
-}
+// Time for read registers from modbus client befor deepsleep
+if (UpCount >= 10){     
+      UpCount = 0;
+        Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
+        esp_sleep_enable_timer_wakeup(Sleeptime); 
+        esp_deep_sleep_start();
+    } else {
+        ++UpCount;
+  }
+       
+Serial.println("\nCounter: " + String(UpCount));
+
+  // Sleeptime = mb.Hreg(106) * 1000000;   // sec to millisec
+  Sleeptime = 60000000;   // sec to millisec
+  // Serial.printf("\nModbus Signal for Deep-Sleep is %s \n", mb.Hreg(105));
+
+  // Sleep start, mb.Reg5 must be true !
+//if (mb.Hreg(105) == 0){    
+//    Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
+//      esp_sleep_enable_timer_wakeup(Sleeptime); 
+//      esp_deep_sleep_start();
+//} else {
+//    Serial.println("\nNo Sleeptime enabled");   
+//}
 
 
 }
