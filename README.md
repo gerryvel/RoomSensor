@@ -17,6 +17,8 @@ Also is a Batterie inserted in the housing and measurement for this voltage.
 The Website use LittleFS Filesystem. You must use Partition Schemes "Minimal SPIFFS with APPS and OTA".
 The HTML Data upload separately.
 
+Modbus is tested with PLC S7-1214 TCP Client and KTP400
+
 # Partlist:
 
 - Espressiv ESP32-C3-DevkitM1 [Link](https://www.reichelt.de/entwicklungsboard-esp32-c3-mini-1-esp32c3devkitm-p311730.html?&nbc=1)
