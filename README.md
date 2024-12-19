@@ -13,6 +13,7 @@ The Modbus-server has 6 Register:
 
 The 12 Volt is reduced 10-26 Volt to 5 Volt with a DC Step-Down_Converter for connect to wired power. 
 Also is a Batterie inserted in the housing and measurement for this voltage.
+After configuration with the Webinterface can you with modbus switch to Deepsleep-Modus.
 
 The Website use LittleFS Filesystem. You must use Partition Schemes "Minimal SPIFFS with APPS and OTA".
 The HTML Data upload separately.
