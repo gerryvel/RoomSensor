@@ -4,11 +4,11 @@
 #include <Arduino.h>
 
 // Versionierung
-#define Version "V1.2 vom 17.12.2024"  // Version
+#define Version "V1.1 vom 19.12.2024"  // Version
 
 //Configuration Web Page 
 #define PAGE_REFRESH 10 // x Sec.
-#define WEB_TITEL "Sensor TPH"
+#define WEB_TITEL "Roomsensor"
 
 //Configuration mit Webinterface
 struct Web_Config
