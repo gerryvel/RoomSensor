@@ -24,8 +24,8 @@ struct Web_Config
 Web_Config tWeb_Config;
 
 //Configuration AP 
-#define HostName        "SensorTPH"
-#define AP_SSID         "SensorTPH"  // SSID Name
+#define HostName        "RoomSensor"
+#define AP_SSID         "RoomSensor"  // SSID Name
 #define AP_PASSWORD     "12345678"    // SSID Password - Set to NULL to have an open AP
 const int   channel        = 10;                // WiFi Channel number between 1 and 13
 const bool  hide_SSID      = false;             // To disable SSID broadcast -> SSID will not appear in a basic WiFi scan
