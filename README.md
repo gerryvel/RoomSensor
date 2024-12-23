@@ -13,9 +13,12 @@ The Modbus-server has 6 Register:
 
 The 12 Volt is reduced 10-26 Volt to 5 Volt with a DC Step-Down_Converter for connect to wired power. 
 Also is a Batterie inserted in the housing and measurement for this voltage.
+After configuration with the Webinterface can you with modbus switch to Deepsleep-Modus.
 
 The Website use LittleFS Filesystem. You must use Partition Schemes "Minimal SPIFFS with APPS and OTA".
 The HTML Data upload separately.
+
+Modbus is tested with PLC S7-1214 TCP Client and KTP400
 
 # Partlist:
 
@@ -42,6 +45,12 @@ PCB by Aisler [Link](https://aisler.net/p/JVQKQVUK)
 <img width="1080" alt="image" src="https://github.com/user-attachments/assets/76e7ed92-e2f1-4aca-aae2-e641b5249f7e" />
 <img width="1080" alt="image" src="https://github.com/user-attachments/assets/a76b5d52-b510-472e-954c-a52bf90fcb06" />
 <img width="1080" alt="image" src="https://github.com/user-attachments/assets/5fa71013-38e1-4a74-ab89-2a668cdcb6f8" />
+
+# S7 Connection
+
+![grafik](https://github.com/user-attachments/assets/8d18e7bc-5492-497c-9e7f-ebbfbf8c76eb)
+![grafik](https://github.com/user-attachments/assets/ee474e9d-3117-4803-ad7e-69706605e85a)
+
 
 
 # Versions
