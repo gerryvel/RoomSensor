@@ -338,8 +338,14 @@ mb.task();
 
 delay(100);
 
+// Sleep start, mb.Reg5 must be true !
+  Serial.print("\nRead Registers");
+  Sleeptime = mb.Hreg(106) * 1000000;   // sec to millisec
+  Serial.println("\nTimer: " + String(Sleeptime));
+  Serial.printf("\nModbus Signal for Deep-Sleep is %i \n", mb.Hreg(105));
+
 // Time for read registers from modbus client befor deepsleep
-if (UpCount >= 10){     
+if (UpCount >= 10 && mb.Hreg(105) == 0){     
       UpCount = 0;
         Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
         esp_sleep_enable_timer_wakeup(Sleeptime); 
@@ -349,20 +355,6 @@ if (UpCount >= 10){
   }
        
   Serial.println("\nCounter: " + String(UpCount));
-  Serial.print("\nRead Registers");
-  Sleeptime = mb.Hreg(106) * 1000000;   // sec to millisec
-  Serial.println("\nTimer: " + String(Sleeptime));
-  //Sleeptime = 60000000;   // sec to millisec
-  Serial.printf("\nModbus Signal for Deep-Sleep is %i \n", mb.Hreg(105));
-
-  // Sleep start, mb.Reg5 must be true !
-//if (mb.Hreg(105) == 0){    
-//    Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
-//      esp_sleep_enable_timer_wakeup(Sleeptime); 
-//      esp_deep_sleep_start();
-//} else {
-//    Serial.println("\nNo Sleeptime enabled");   
-//}
 
 
 }
