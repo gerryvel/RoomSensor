@@ -14,7 +14,7 @@
   NMEA2000 Temperature and Barometric Pressure with BMP280 or 388.
   Reads messages from NMEA0183 WindSensor and forwards them to the N2k bus.
 
-  V1.0 vom 16.12.2024, gerryvel Gerry Sebb
+  V1.2 vom 16.12.2024, gerryvel Gerry Sebb
 */
 
 #include <Arduino.h>
@@ -293,9 +293,9 @@ ArduinoOTA.handle();
     fbmx_humidity = bme280.readHumidity();
     fbmx_altitude = bme280.readAltitude(SEALEVELPRESSURE_HPA);
     Serial.printf("Temperatur  : %3.1f °C\n", fbmx_temperature);
-    Serial.printf("Luftdruck   : %4.2f mbar\n", fbmx_pressure/100);
+    Serial.printf("Luftdruck   : %4.1f mbar\n", fbmx_pressure/100);
     Serial.printf("Luftfeuchte : %4.1f %%\n", fbmx_humidity);
-    Serial.printf("Höhe        : %4.1f m\n", fbmx_altitude);
+    Serial.printf("Höhe        : %5.1f m\n", fbmx_altitude);
   }
 
   if (Sensortyp == 2)
@@ -319,7 +319,7 @@ ArduinoOTA.handle();
 WebReboot();  
 
 BoardSpannung = ((BoardSpannung * 15) + (ReadVoltage(ADCpin1) * ADC_Calibration_Value1 / 4096)) / 16; // This implements a low pass filter to eliminate spike for ADC readings
-Serial.printf("Spannung  : %3.2f V\n", BoardSpannung);
+Serial.printf("Spannung    : %3.2f V\n", BoardSpannung);
 
 mb.task();
    delay(10);
@@ -348,11 +348,12 @@ if (UpCount >= 10){
         ++UpCount;
   }
        
-Serial.println("\nCounter: " + String(UpCount));
-
-  // Sleeptime = mb.Hreg(106) * 1000000;   // sec to millisec
-  Sleeptime = 60000000;   // sec to millisec
-  // Serial.printf("\nModbus Signal for Deep-Sleep is %s \n", mb.Hreg(105));
+  Serial.println("\nCounter: " + String(UpCount));
+  Serial.print("\nRead Registers");
+  Sleeptime = mb.Hreg(106) * 1000000;   // sec to millisec
+  Serial.println("\nTimer: " + String(Sleeptime));
+  //Sleeptime = 60000000;   // sec to millisec
+  Serial.printf("\nModbus Signal for Deep-Sleep is %i \n", mb.Hreg(105));
 
   // Sleep start, mb.Reg5 must be true !
 //if (mb.Hreg(105) == 0){    
