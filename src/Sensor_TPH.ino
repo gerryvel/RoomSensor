@@ -339,10 +339,11 @@ mb.task();
 delay(100);
 
 // Sleep start, mb.Reg5 must be true !
-  Serial.print("\nRead Registers");
+  Serial.println("\nRead Register 105 : " + String(mb.Hreg(105)));
+  Serial.println("Read Register 106 : " + String(mb.Hreg(106)));
   Sleeptime = mb.Hreg(106) * 1000000;   // sec to millisec
   Serial.println("\nTimer: " + String(Sleeptime));
-  Serial.printf("\nModbus Signal for Deep-Sleep is %i \n", mb.Hreg(105));
+  Serial.printf("Modbus Signal for Deep-Sleep is %i \n", mb.Hreg(105));
 
 // Time for read registers from modbus client befor deepsleep
 if (UpCount >= 10 && mb.Hreg(105) == 0){     
