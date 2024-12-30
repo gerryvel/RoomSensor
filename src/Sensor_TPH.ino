@@ -337,15 +337,15 @@ mb.task();
   mb.Hreg(102, RegVal2);   // Value in xx.x %
   mb.Hreg(103, RegVal3);   // Value in xxxx m
   mb.Hreg(104, RegVal4);   // Value in xx.xx V
+  SleepOn = mb.Hreg(105);
+  SleepT = mb.Hreg(106);
 
 delay(100);
 
 // Sleep start, mb.Reg5 must be true !
-  uint16_t SleepOn = mb.Hreg(105);
-  uint16_t Sleep = mb.Hreg(106);
-  Serial.println("\nRead Register 105 : " + String(SleepOn));
-  Serial.println("Read Register 106 : " + String(Sleep));
-  Sleeptime = Sleep * 1000000;   // sec to millisec
+  Serial.println("\nRead Register 105 : " + String(mb.Hreg(105)));
+  Serial.println("Read Register 106 : " + String(mb.Hreg(106)));
+  Sleeptime = SleepT * 1000000;   // sec to millisec
   Serial.println("\nTimer: " + String(Sleeptime));
   Serial.printf("Modbus Signal for Deep-Sleep is %i \n", SleepOn);
 

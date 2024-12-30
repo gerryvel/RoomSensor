@@ -91,5 +91,7 @@ float BoardSpannung = 0;
 // Deepsleep
 double Sleeptime = 0;   // 60.000.000 Mikrosekunden = 1 Minute
 int UpCount = 0;
+int SleepOn = 0;
+int SleepT = 60;
 
 #endif  
