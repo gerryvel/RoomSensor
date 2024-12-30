@@ -89,7 +89,7 @@ float BoardSpannung = 0;
 #define ADC_Calibration_Value1 27.0 // The real value depends on the true resistor values for the ADC input (110K / 11 K)
 
 // Deepsleep
-double Sleeptime = 60000000;   // 60.000.000 Mikrosekunden = 1 Minute
+double Sleeptime = 0;   // 60.000.000 Mikrosekunden = 1 Minute
 int UpCount = 0;
 
 #endif  

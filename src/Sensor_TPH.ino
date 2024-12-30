@@ -212,6 +212,8 @@ WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
 
   mb.server();
   mb.addHreg(Sensor_HREG, 0, 20);
+  mb.addHreg(105, 0);
+  mb.addHreg(106, 60);
 
 // MDNS
   MDNSResponder mdns;
@@ -339,14 +341,16 @@ mb.task();
 delay(100);
 
 // Sleep start, mb.Reg5 must be true !
-  Serial.println("\nRead Register 105 : " + String(mb.Hreg(105)));
-  Serial.println("Read Register 106 : " + String(mb.Hreg(106)));
-  Sleeptime = mb.Hreg(106) * 1000000;   // sec to millisec
+  uint16_t SleepOn = mb.Hreg(105);
+  uint16_t Sleep = mb.Hreg(106);
+  Serial.println("\nRead Register 105 : " + String(SleepOn));
+  Serial.println("Read Register 106 : " + String(Sleep));
+  Sleeptime = Sleep * 1000000;   // sec to millisec
   Serial.println("\nTimer: " + String(Sleeptime));
-  Serial.printf("Modbus Signal for Deep-Sleep is %i \n", mb.Hreg(105));
+  Serial.printf("Modbus Signal for Deep-Sleep is %i \n", SleepOn);
 
 // Time for read registers from modbus client befor deepsleep
-if (UpCount >= 10 && mb.Hreg(105) == 0){     
+if (UpCount >= 10 && SleepOn == 0){     
       UpCount = 0;
         Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
         esp_sleep_enable_timer_wakeup(Sleeptime); 
