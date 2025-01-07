@@ -117,13 +117,13 @@ void readConfig(String filename) {
 		Serial.println("deserializeJson ok");
 		{
 			Serial.println("Lese Daten aus Config - Datei");
-			strcpy(tWeb_Config.wAP_SSID, testDocument["SSID"] | "sebbwlan");
-			strcpy(tWeb_Config.wAP_Password, testDocument["Password"] | "schmilka200");
-      strcpy(tWeb_Config.wBMP_Sensortype, testDocument["BMP"] | "");
-      strcpy(tWeb_Config.wClient_IP, testDocument["Client_IP"] | "");
-      strcpy(tWeb_Config.wClient_NMask, testDocument["Client_NMask"] | "");
-      strcpy(tWeb_Config.wClient_Gateway, testDocument["Client_Gateway"] | "");
-      strcpy(tWeb_Config.wClient_DNS, testDocument["Client_DNS"] | "");
+			strcpy(tWeb_Config.wAP_SSID, testDocument["jSSID"] | "sebbwlan");
+			strcpy(tWeb_Config.wAP_Password, testDocument["jPassword"] | "schmilka200");
+      strcpy(tWeb_Config.wBMP_Sensortype, testDocument["jBMP"] | "1");
+      strcpy(tWeb_Config.wClient_IP, testDocument["jClient_IP"] | "");
+      strcpy(tWeb_Config.wClient_NMask, testDocument["jClient_NMask"] | "");
+      strcpy(tWeb_Config.wClient_Gateway, testDocument["jClient_Gateway"] | "");
+      strcpy(tWeb_Config.wClient_DNS, testDocument["jClient_DNS"] | "");
 		}
 		configFile.close();
 		Serial.println("Config - Datei geschlossen");

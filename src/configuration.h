@@ -15,7 +15,7 @@ struct Web_Config
 {
 	char wAP_SSID[64];
 	char wAP_Password[12];
-	char wBMP_Sensortype[1];
+	char wBMP_Sensortype[2];
 	char wClient_IP[16];
 	char wClient_NMask[16];
 	char wClient_Gateway[16];
@@ -56,7 +56,7 @@ bool bClientConnected = 0;
 
 // Configuratin Sensors
 #define SEALEVELPRESSURE_HPA (1013.25)  //1013.25
-bool Sensortyp = 0;             // BMP280 = 0, BME280 = 1, BME3xx = 2
+int iSensortyp = 0;             // BMP280 = 0, BME280 = 1, BME3xx = 2
 float fbmx_temperature = 0;
 float fbmx_pressure = 0;
 float fbmx_altitude = 0;

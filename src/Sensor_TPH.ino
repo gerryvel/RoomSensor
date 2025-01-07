@@ -76,13 +76,13 @@ void setup()
 	CL_SSID = tWeb_Config.wAP_SSID;               
 	CL_PASSWORD = tWeb_Config.wAP_Password;
   //read sensortype
-  Sensortyp = tWeb_Config.wBMP_Sensortype; 
+  iSensortyp = atoi(tWeb_Config.wBMP_Sensortype);
   // read client data
   CL_IP = inet_addr(tWeb_Config.wClient_IP);
   CL_Gateway = inet_addr(tWeb_Config.wClient_Gateway);
   CL_NMask = inet_addr(tWeb_Config.wClient_NMask);
   CL_DNS = inet_addr(tWeb_Config.wClient_DNS);
-  Serial.println("Configdata:\n Client SSID: " + CL_SSID + ", Passwort: " + CL_PASSWORD + ", Sensortyp: " + Sensortyp);
+  Serial.println("Configdata:\n Client SSID: " + CL_SSID + ", Passwort: " + CL_PASSWORD + ", iSensortyp: " + iSensortyp);
   Serial.println("Clientdata:\n Client IP: " + CL_IP.toString() + ", Netmask: " + CL_NMask.toString() + ", Gateway: " + CL_Gateway.toString() + ", DNS: " + CL_DNS.toString());
 
   freeHeapSpace();
@@ -185,20 +185,20 @@ WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
 
 
 // BMP begin & setup
-  if (Sensortyp == 0){
+  if (iSensortyp == 0){
       sBMP = "BMP280";
     if (!bmp280.begin()) 
   {
     Serial.println("Could not find a valid BMP280 sensor, check wiring!");
   }
   }
-  if (Sensortyp == 1){
+  if (iSensortyp == 1){
     sBMP = "BME280";
     if(!bme280.begin(0x76)){
     Serial.println("Could not find a valid BME280 sensor, check wiring!");  
     }
   }
-  if (Sensortyp == 2){
+  if (iSensortyp == 2){
       sBMP = "BMP388";
     if (!bmp3xx.begin_I2C()) 
   {
@@ -275,7 +275,7 @@ ArduinoOTA.handle();
  delay(500);
 
  //Read BMP  
-  if (Sensortyp == 0)
+  if (iSensortyp == 0)
   {
     Serial.print("Read BMP 280\n");
     sBMP_Status = "BMP lesen erfolgreich";
@@ -286,7 +286,7 @@ ArduinoOTA.handle();
     Serial.printf("Luftdruck : %4.1f mbar\n", fbmx_pressure);
     Serial.printf("Höhe      : %4.1f m\n", fbmx_altitude);
   }
-  if (Sensortyp == 1)
+  if (iSensortyp == 1)
   {
     Serial.print("Read BME 280\n");
     sBMP_Status = "BME lesen erfolgreich";
@@ -300,7 +300,7 @@ ArduinoOTA.handle();
     Serial.printf("Höhe        : %5.1f m\n", fbmx_altitude);
   }
 
-  if (Sensortyp == 2)
+  if (iSensortyp == 2)
   {
     if (!bmp3xx.performReading()) 
     {       
