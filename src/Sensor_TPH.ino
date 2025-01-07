@@ -325,18 +325,25 @@ Serial.printf("Spannung    : %3.2f V\n", BoardSpannung);
 
 mb.task();
    delay(10);
-
+/**
+ * @brief Modbus Werte berechnen
+ */
   RegVal0 = fbmx_temperature*10;
   RegVal1 = fbmx_pressure/100;
   RegVal2 = fbmx_humidity*10;
   RegVal3 = fbmx_altitude;
   RegVal4 = BoardSpannung*100;
-
+/**
+ * @brief Modbus Register schreiben
+ */
   mb.Hreg(100, RegVal0);   // Value in xx,x °C 
   mb.Hreg(101, RegVal1);   // Value in xxxx mbar
   mb.Hreg(102, RegVal2);   // Value in xx.x %
   mb.Hreg(103, RegVal3);   // Value in xxxx m
   mb.Hreg(104, RegVal4);   // Value in xx.xx V
+/**
+ * @brief Modbus Register für die lokale Verwendung lesen
+ */
   SleepOn = mb.Hreg(105);
   SleepT = mb.Hreg(106);
 
