@@ -9,7 +9,7 @@ The Modbus-server has 6 Register:
 - humidity
 - altitude
 - voltage (batterie)
-- Set "True" from client: enable Deep-Sleep-Modus for 1 min and WiFiScan off
+- Set "True" from client: enable Deep-Sleep-Modus for xx min
 
 The 12 Volt is reduced 10-26 Volt to 5 Volt with a DC Step-Down_Converter for connect to wired power. 
 Also is a Batterie inserted in the housing and measurement for this voltage.
