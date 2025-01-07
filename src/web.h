@@ -78,8 +78,8 @@ String replaceVariable(const String& var){
 	if (var == "sReg2")return String(RegVal2);
 	if (var == "sReg3")return String(RegVal3);
 	if (var == "sReg4")return String(RegVal4);
-	if (var == "sReg4")return String(SleepOn);
-	if (var == "sReg4")return String(SleepT);
+	if (var == "sReg5")return String(SleepOn);
+	if (var == "sReg6")return String(SleepT);
 	if (var == "sVersion")return Version;
   	if (var == "CONFIGPLACEHOLDER")return processor(var);
   return "NoVariable";

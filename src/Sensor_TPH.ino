@@ -349,15 +349,21 @@ mb.task();
 
 delay(100);
 
-// Sleep start, mb.Reg5 must be true !
-  Serial.println("\nRead Register 105 : " + String(mb.Hreg(105)));
-  Serial.println("Read Register 106 : " + String(mb.Hreg(106)));
+// Read Register
+  Serial.println("\nMB Register 100 : " + String(mb.Hreg(100)));
+  Serial.println("MB Register 101 : " + String(mb.Hreg(101)));
+  Serial.println("MB Register 102 : " + String(mb.Hreg(102)));
+  Serial.println("MB Register 103 : " + String(mb.Hreg(103)));
+  Serial.println("MB Register 104 : " + String(mb.Hreg(104)));
+  Serial.println("MB Register 105 : " + String(mb.Hreg(105)));
+  Serial.println("MB Register 106 : " + String(mb.Hreg(106)));
+  // Sleep start, mb.Reg5 must be true !
   Sleeptime = SleepT * 1000000;   // sec to millisec
   Serial.println("\nTimer: " + String(Sleeptime));
   Serial.printf("Modbus Signal for Deep-Sleep is %i \n", SleepOn);
 
 // Time for read registers from modbus client befor deepsleep
-if (UpCount >= 10 && SleepOn == 0){     
+if (UpCount >= 10 && SleepOn == 1){     
       UpCount = 0;
         Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
         esp_sleep_enable_timer_wakeup(Sleeptime); 
