@@ -66,12 +66,12 @@ String replaceVariable(const String& var){
  	if (var == "sCL_Addr")return WiFi.localIP().toString();	
 	if (var == "sCL_Subnet")return WiFi.subnetMask().toString();
 	if (var == "sCL_Gateway")return WiFi.gatewayIP().toString();	
- 	if (var == "sCL_Status")return String(sCL_Status);
-  	if (var == "sI2C_Status")return String(sI2C_Status);
-  	if (var == "sBMP_Status")return String(sBMP_Status);
+ 	if (var == "sCL_Status")return sCL_Status;
+  	if (var == "sI2C_Status")return sI2C_Status;
+  	if (var == "sBMP_Status")return sBMP_Status;
   	if (var == "sCL_SSID")return String(CL_SSID);
   	if (var == "sCL_PASSWORD")return String(CL_PASSWORD);
-	if (var == "sBMP")return String(iSensortyp);
+	if (var == "sBMP")return sBMP;
 	if (var == "sModbusOffset")return String(Sensor_HREG);
 	if (var == "sReg0")return String(RegVal0);
 	if (var == "sReg1")return String(RegVal1);
