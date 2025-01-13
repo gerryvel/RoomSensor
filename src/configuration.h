@@ -74,7 +74,9 @@ int RegVal1 = 0;	// Pressure
 int RegVal2 = 0;	// Hum
 int RegVal3 = 0;	// Altitude
 int RegVal4 = 0;	// Spannung
-
+int iKal_temperature = 0;
+int iKal_pressure = 0;
+int iKal_humidity = 0;
 
 // RGB LED buildin
 #define LED_PIN     8 //Pin 46 on Thing Plus C S3 is connected to WS2812 LED

@@ -212,8 +212,6 @@ WiFi.begin((const char*)CL_SSID.c_str(), (const char*)CL_PASSWORD.c_str());
 
   mb.server();
   mb.addHreg(Sensor_HREG, 0, 20);
-  mb.addHreg(105, 0);
-  mb.addHreg(106, 60);
 
 // MDNS
   MDNSResponder mdns;
@@ -325,14 +323,23 @@ Serial.printf("Spannung    : %3.2f V\n", BoardSpannung);
 
 mb.task();
    delay(10);
+
 /**
- * @brief Modbus Werte berechnen
+ * @brief Modbus read calibration value 
  */
-  RegVal0 = fbmx_temperature*10;
-  RegVal1 = fbmx_pressure/100;
-  RegVal2 = fbmx_humidity*10;
+  iKal_temperature = mb.Hreg(115);
+  iKal_pressure = mb.Hreg(116);
+  iKal_humidity = mb.Hreg(117);
+
+/**
+ * @brief Modbus values berechnen
+ */
+  RegVal0 = fbmx_temperature*10 + iKal_temperature;
+  RegVal1 = fbmx_pressure/100 + iKal_pressure;
+  RegVal2 = fbmx_humidity*10 + iKal_humidity;
   RegVal3 = fbmx_altitude;
   RegVal4 = BoardSpannung*100;
+
 /**
  * @brief Modbus Register schreiben
  */
@@ -344,20 +351,26 @@ mb.task();
 /**
  * @brief Modbus Register für die lokale Verwendung lesen
  */
-  SleepOn = mb.Hreg(105);
-  SleepT = mb.Hreg(106);
+  SleepOn = mb.Hreg(110);
+  SleepT = mb.Hreg(111);
 
 delay(100);
 
 // Read Register
-  Serial.println("\nMB Register 100 : " + String(mb.Hreg(100)));
+  Serial.println("\nMB Register read : ");
+  Serial.println("MB Register 100 : " + String(mb.Hreg(100)));
   Serial.println("MB Register 101 : " + String(mb.Hreg(101)));
   Serial.println("MB Register 102 : " + String(mb.Hreg(102)));
   Serial.println("MB Register 103 : " + String(mb.Hreg(103)));
   Serial.println("MB Register 104 : " + String(mb.Hreg(104)));
-  Serial.println("MB Register 105 : " + String(mb.Hreg(105)));
-  Serial.println("MB Register 106 : " + String(mb.Hreg(106)));
-  // Sleep start, mb.Reg5 must be true !
+  Serial.println("MB Register read/write : ");
+  Serial.println("MB Register 110 : " + String(mb.Hreg(110)));
+  Serial.println("MB Register 111 : " + String(mb.Hreg(111)));
+  Serial.println("MB Register 115 : " + String(mb.Hreg(115)));
+  Serial.println("MB Register 116 : " + String(mb.Hreg(116)));
+  Serial.println("MB Register 117 : " + String(mb.Hreg(117)));
+
+  // Sleep start, Register 110 must be true !
   Sleeptime = SleepT * 1000000;   // sec to millisec
   Serial.println("\nTimer: " + String(Sleeptime));
   Serial.printf("Modbus Signal for Deep-Sleep is %i \n", SleepOn);

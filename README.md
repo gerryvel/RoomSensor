@@ -11,9 +11,11 @@ The Modbus-server has 7 Register:
 - Register 2, read, humidity
 - Register 3, read, altitude
 - Register 4, read, voltage (batterie)
-- Register 5, read/write, Set "True" from client: enable Deep-Sleep-Modus for xx sec
-- Register 6, read/write, Deepsleep-Time in sec
-
+- Register 10, read/write, Set "True" from client: enable Deep-Sleep-Modus for xx sec
+- Register 11, read/write, Deepsleep-Time in sec
+- Register 15, read/write, calibraton value temperature
+- Register 16, read/write, calibraton value pressure
+- Register 17, read/write, calibraton value humidity
 
 The 12 Volt is reduced 10-26 Volt to 5 Volt with a DC Step-Down_Converter for connect to wired power. 
 Also is a Batterie inserted in the housing and measurement for this voltage.
@@ -56,9 +58,9 @@ PCB by Aisler [Link](https://aisler.net/p/JVQKQVUK)
 ![grafik](https://github.com/user-attachments/assets/ee474e9d-3117-4803-ad7e-69706605e85a)
 
 
-
 ## Versions
 
+- 1.4 add calibration Register
 - 1.3 Update Settings (failure BMP Type)
 - 1.2 add Modbusregister to switch DeepSleepModus on and WiFiScan off
 - 1.1 add batterie voltage measurement
