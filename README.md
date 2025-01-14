@@ -40,7 +40,6 @@ Modbus is tested with PLC S7-1214 TCP Client and KTP400
 ![grafik](https://github.com/user-attachments/assets/d2bd1a8f-84b5-4373-a100-b24541ba1129)
 
 ## PCB and Housing assembly
-![image](https://github.com/user-attachments/assets/1f1e8f95-4026-45f8-b86d-f63d5b3542ee)
 
 PCB by Aisler [Link](https://aisler.net/p/JVQKQVUK)
 
