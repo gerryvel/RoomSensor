@@ -372,7 +372,7 @@ delay(100);
 
   // Sleep start, Register 110 must be true !
   Sleeptime = SleepT * 1000000;   // sec to millisec
-  Serial.println("\nTimer: " + String(Sleeptime));
+  Serial.println("\nTimer: " + String(Sleeptime) + " ms");
   Serial.printf("Modbus Signal for Deep-Sleep is %i \n", SleepOn);
 
 // Time for read registers from modbus client befor deepsleep
