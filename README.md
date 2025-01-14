@@ -17,7 +17,7 @@ The Modbus-server has 10 Register:
 - Register 16, read/write, calibraton value pressure
 - Register 17, read/write, calibraton value humidity
 
-The 12 Volt is reduced 10-26 Volt to 5 Volt with a DC Step-Down_Converter for connect to wired power. 
+The 12/24 Volt is reduced 10-26 Volt to 5 Volt with a DC Step-Down_Converter for connect to wired power. 
 Also is a Batterie inserted in the housing and measurement for this voltage.
 After configuration with the Webinterface can you with modbus switch to Deepsleep-Modus.
 
