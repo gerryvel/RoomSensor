@@ -5,7 +5,7 @@
 The ESP32 in this project is an ESP32C3. This is a small module with USB connector.
 The Sensors is a BME280 for Temperatur, pressure and humidity.
 It's Webinterface and Modbus available. 
-The Modbus-server has 7 Register:
+The Modbus-server has 10 Register:
 - Register 0, read, temperatur
 - Register 1, read, pressure
 - Register 2, read, humidity
@@ -55,7 +55,7 @@ PCB by Aisler [Link](https://aisler.net/p/JVQKQVUK)
 ## S7 Connection
 
 ![grafik](https://github.com/user-attachments/assets/8d18e7bc-5492-497c-9e7f-ebbfbf8c76eb)
-
+![image](https://github.com/user-attachments/assets/ad6a4ff1-3819-489d-a649-924569887975)
 
 ## Versions
 
