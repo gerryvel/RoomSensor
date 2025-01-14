@@ -40,6 +40,7 @@ Modbus is tested with PLC S7-1214 TCP Client and KTP400
 ![grafik](https://github.com/user-attachments/assets/d2bd1a8f-84b5-4373-a100-b24541ba1129)
 
 ## PCB and Housing assembly
+![image](https://github.com/user-attachments/assets/1f1e8f95-4026-45f8-b86d-f63d5b3542ee)
 
 ![grafik](https://github.com/user-attachments/assets/29a6c316-a486-42a8-855a-6aeb1b7e20d0)
 
@@ -48,14 +49,15 @@ PCB by Aisler [Link](https://aisler.net/p/JVQKQVUK)
 ## Webinterface
 
 <img width="1080" alt="image" src="https://github.com/user-attachments/assets/b9d54b22-bd9d-4a3b-9983-1489b16eb7a9" />
-<img width="1080" alt="image" src="https://github.com/user-attachments/assets/76e7ed92-e2f1-4aca-aae2-e641b5249f7e" />
-<img width="1080" alt="image" src="https://github.com/user-attachments/assets/a76b5d52-b510-472e-954c-a52bf90fcb06" />
-<img width="1080" alt="image" src="https://github.com/user-attachments/assets/5fa71013-38e1-4a74-ab89-2a668cdcb6f8" />
+![image](https://github.com/user-attachments/assets/f0e8f621-3172-453b-bf13-41479121e3d0)
+![image](https://github.com/user-attachments/assets/5a74517a-ba20-4394-a14d-4751606eade1)
+![image](https://github.com/user-attachments/assets/439c5168-e7c4-43c5-b4e7-7ae0b0f7ac12)
+![image](https://github.com/user-attachments/assets/0ed3708e-595e-4d6e-a7cb-f49c0f9cf3de)
+
 
 ## S7 Connection
 
 ![grafik](https://github.com/user-attachments/assets/8d18e7bc-5492-497c-9e7f-ebbfbf8c76eb)
-![grafik](https://github.com/user-attachments/assets/ee474e9d-3117-4803-ad7e-69706605e85a)
 
 
 ## Versions
