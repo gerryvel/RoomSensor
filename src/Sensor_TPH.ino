@@ -343,18 +343,12 @@ mb.task();
 /**
  * @brief Modbus Register für die lokale Verwendung lesen 
  */
+  Serial.println("\nRead NVS and store values to MB register");
   SleepOn = mb.Hreg(110);
   SleepT = mb.Hreg(111);
   iKal_temperature = mb.Hreg(115);
   iKal_pressure = mb.Hreg(116);
   iKal_humidity = mb.Hreg(117);
-  
-// Bleiben die Modbusdaten im Sleep erhalten? Lesen der Register und speichern im NVS 
-  MB_Daten.putInt("Register110", mb.Hreg(110));
-  MB_Daten.putInt("Register111", mb.Hreg(111));
-  MB_Daten.putInt("Register115", mb.Hreg(115));
-  MB_Daten.putInt("Register116", mb.Hreg(116));
-  MB_Daten.putInt("Register117", mb.Hreg(117));
 
 /**
  * @brief Modbus values berechnen
@@ -373,8 +367,6 @@ mb.task();
   mb.Hreg(102, RegVal2);   // Value in xx.x %
   mb.Hreg(103, RegVal3);   // Value in xxxx m
   mb.Hreg(104, RegVal4);   // Value in xx.xx V
-
-
 
 delay(100);
 
@@ -400,8 +392,19 @@ delay(100);
 // Time for read registers from modbus client befor deepsleep
 if (UpCount >= 10 && SleepOn == 1){     
       UpCount = 0;
+        
+        // Bleiben die Modbusdaten im Sleep erhalten? Lesen der Register und speichern im NVS 
+        Serial.println("\nWrite register values to NVS");
+        MB_Daten.putInt("Register110", mb.Hreg(110));
+        MB_Daten.putInt("Register111", mb.Hreg(111));
+        MB_Daten.putInt("Register115", mb.Hreg(115));
+        MB_Daten.putInt("Register116", mb.Hreg(116));
+        MB_Daten.putInt("Register117", mb.Hreg(117));
+        delay(500);
+
         Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
         esp_sleep_enable_timer_wakeup(Sleeptime); 
+        
         esp_deep_sleep_start();
     } else {
         ++UpCount;
