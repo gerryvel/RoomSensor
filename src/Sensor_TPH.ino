@@ -41,12 +41,15 @@
 #include "esp_sleep.h"
 
 // BMP
-Adafruit_BMP280 bmp280;
-Adafruit_BMP3XX bmp3xx;
-Adafruit_BME280 bme280;
+  Adafruit_BMP280 bmp280;
+  Adafruit_BMP3XX bmp3xx;
+  Adafruit_BME280 bme280;
 
 //ModbusIP object
-ModbusIP mb;
+  ModbusIP mb;
+
+// Namensraum festlegen
+  Preferences MB_Daten;
 
 //================================== SETUP ==============================//
 void setup()
@@ -61,6 +64,12 @@ void setup()
   Serial.print("CPU Freq = ");
   Serial.print(Freq);
   Serial.println(" MHz");
+
+/**
+ * @brief Preferences starten: Namensraum festlegen 
+ * readonly: true -> nur lesen, false -> lesen und schreiben
+ */
+  MB_Daten.begin("Werte", false);
 
 //Filesystem
 	if (!LittleFS.begin(true)) {
@@ -321,6 +330,13 @@ WebReboot();
 BoardSpannung = ((BoardSpannung * 15) + (ReadVoltage(ADCpin1) * ADC_Calibration_Value1 / 4096)) / 16; // This implements a low pass filter to eliminate spike for ADC readings
 Serial.printf("Spannung    : %3.2f V\n", BoardSpannung);
 
+// Modbusregister nach Deepsleep wiederherstellen
+  mb.Hreg(110, MB_Daten.getInt("Register110"));   // Value on/off
+  mb.Hreg(111, MB_Daten.getInt("Register111"));   // Value sec
+  mb.Hreg(115, MB_Daten.getInt("Register115"));   // Value calibration
+  mb.Hreg(116, MB_Daten.getInt("Register116"));   // Value calibration
+  mb.Hreg(117, MB_Daten.getInt("Register117"));   // Value calibration
+
 mb.task();
    delay(10);
 
@@ -333,7 +349,12 @@ mb.task();
   iKal_pressure = mb.Hreg(116);
   iKal_humidity = mb.Hreg(117);
   
-// Bleiben die Modbusdaten im Sleep erhalten? Speichern der aktuellen Werte?  
+// Bleiben die Modbusdaten im Sleep erhalten? Lesen der Register und speichern im NVS 
+  MB_Daten.putInt("Register110", mb.Hreg(110));
+  MB_Daten.putInt("Register111", mb.Hreg(111));
+  MB_Daten.putInt("Register115", mb.Hreg(115));
+  MB_Daten.putInt("Register116", mb.Hreg(116));
+  MB_Daten.putInt("Register117", mb.Hreg(117));
 
 /**
  * @brief Modbus values berechnen
