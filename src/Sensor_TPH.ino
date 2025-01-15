@@ -325,11 +325,15 @@ mb.task();
    delay(10);
 
 /**
- * @brief Modbus read calibration value 
+ * @brief Modbus Register für die lokale Verwendung lesen 
  */
+  SleepOn = mb.Hreg(110);
+  SleepT = mb.Hreg(111);
   iKal_temperature = mb.Hreg(115);
   iKal_pressure = mb.Hreg(116);
   iKal_humidity = mb.Hreg(117);
+  
+// Bleiben diei  Modbusdaten erhalten? Speichern der aktuellen Werte?  
 
 /**
  * @brief Modbus values berechnen
@@ -348,11 +352,8 @@ mb.task();
   mb.Hreg(102, RegVal2);   // Value in xx.x %
   mb.Hreg(103, RegVal3);   // Value in xxxx m
   mb.Hreg(104, RegVal4);   // Value in xx.xx V
-/**
- * @brief Modbus Register für die lokale Verwendung lesen
- */
-  SleepOn = mb.Hreg(110);
-  SleepT = mb.Hreg(111);
+
+
 
 delay(100);
 
