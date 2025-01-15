@@ -333,7 +333,7 @@ mb.task();
   iKal_pressure = mb.Hreg(116);
   iKal_humidity = mb.Hreg(117);
   
-// Bleiben diei  Modbusdaten erhalten? Speichern der aktuellen Werte?  
+// Bleiben die Modbusdaten im Sleep erhalten? Speichern der aktuellen Werte?  
 
 /**
  * @brief Modbus values berechnen
