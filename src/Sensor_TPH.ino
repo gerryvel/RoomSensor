@@ -39,6 +39,7 @@
 #include "analog.h"
 #include <ModbusIP_ESP8266.h>
 #include "esp_sleep.h"
+#include "bme280conf.h"
 
 // BMP
   Adafruit_BMP280 bmp280;
@@ -61,9 +62,7 @@ void setup()
 // Set the CPU frequency to 80 MHz for consumption optimization
   setCpuFrequencyMhz(80);
   uint16_t Freq = getCpuFrequencyMhz();
-  Serial.print("CPU Freq = ");
-  Serial.print(Freq);
-  Serial.println(" MHz");
+  Serial.println("CPU Freq = " + String(Freq) + " MHz");
 
 /**
  * @brief Preferences starten: Namensraum festlegen 
@@ -327,7 +326,8 @@ ArduinoOTA.handle();
 
 WebReboot();  
 
-BoardSpannung = ((BoardSpannung * 15) + (ReadVoltage(ADCpin1) * ADC_Calibration_Value1 / 4096)) / 16; // This implements a low pass filter to eliminate spike for ADC readings
+// BoardSpannung = ((BoardSpannung * 15) + (ReadVoltage(ADCpinBat) * ADC_Calibration_Value1 / 4096)) / 16; // This implements a low pass filter to eliminate spike for ADC readings
+BoardSpannung = (analogRead(ADCpinBat) / 3.3 * 4.096) / 1000;
 Serial.printf("Spannung    : %3.2f V\n", BoardSpannung);
 
 // Modbusregister nach Deepsleep wiederherstellen
@@ -393,7 +393,7 @@ delay(100);
 if (UpCount >= 10 && SleepOn == 1){     
       UpCount = 0;
         
-        // Bleiben die Modbusdaten im Sleep erhalten? Lesen der Register und speichern im NVS 
+        // Read Register und store in NVS 
         Serial.println("\nWrite register values to NVS");
         MB_Daten.putInt("Register110", mb.Hreg(110));
         MB_Daten.putInt("Register111", mb.Hreg(111));
@@ -401,6 +401,10 @@ if (UpCount >= 10 && SleepOn == 1){
         MB_Daten.putInt("Register116", mb.Hreg(116));
         MB_Daten.putInt("Register117", mb.Hreg(117));
         delay(500);
+
+        if (iSensortyp == 1){
+          BME280_Sleep(0x76);
+        }
 
         Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
         esp_sleep_enable_timer_wakeup(Sleeptime); 

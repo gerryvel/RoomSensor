@@ -51,8 +51,8 @@ int bConnect_CL = 0;
 bool bClientConnected = 0;
 
 //Confuration I2C
-#define BMP_SDA 6                      //Standard 21
-#define BMP_SCL 7                      //Standard 22
+#define BMP_SDA 23                      //Standard 21
+#define BMP_SCL 22                      //Standard 22
 
 // Configuratin Sensors
 #define SEALEVELPRESSURE_HPA (1013.25)  //1013.25
@@ -86,7 +86,8 @@ int iKal_humidity = 0;
 #define BRIGHTNESS  25
 
 // ADC
-const int ADCpin1 = 1; // Voltage measure is connected GPIO 1 (Analog ADC1_1)
+const int ADCpin1 = 32; // Voltage measure is connected GPIO 1 (Analog ADC1_1)
+const int ADCpinBat = 35; // Fether32 Vbat Pin internal GPIO35
 float BoardSpannung = 0;
 #define ADC_Calibration_Value1 27.0 // The real value depends on the true resistor values for the ADC input (110K / 11 K)
 
