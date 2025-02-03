@@ -38,7 +38,7 @@
 #include "web.h"
 #include "analog.h"
 #include <ModbusIP_ESP8266.h>
-#include "esp_sleep.h"
+#include "sleep.h"
 #include "bme280conf.h"
 
 // BMP
@@ -406,10 +406,8 @@ if (UpCount >= 10 && SleepOn == 1){
           BME280_Sleep(0x76);
         }
 
-        Serial.println("\nGo to Deep-Sleep-Mode for " + String(Sleeptime/1000000) + " seconds\n");
-        esp_sleep_enable_timer_wakeup(Sleeptime); 
+      ESPgoToSleep();
         
-        esp_deep_sleep_start();
     } else {
         ++UpCount;
   }
