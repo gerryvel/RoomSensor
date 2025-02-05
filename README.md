@@ -1,5 +1,7 @@
 # Room Sensor Modul
 
+![ESP32](https://img.shields.io/badge/ESP32-grey?logo=Espressif)
+
 ## Description
 
 The ESP32 in this project is an ESP32C3. This is a small module with USB connector.
