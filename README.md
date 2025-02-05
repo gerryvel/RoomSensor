@@ -1,6 +1,7 @@
 # Room Sensor Modul
 
 ![ESP32](https://img.shields.io/badge/ESP32-grey?logo=Espressif)
+![KiCad](https://img.shields.io/badge/KiCad-grey?logo=KiCad)
 
 ## Description
 
